@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="go to yesterday">
+    <mat-icon (click)="navigateBack()">arrow_back_ios</mat-icon>
+  </button>
+
+  <span class="filler"></span>
+
+  <span>Auswahl bearbeiten</span>
+
+  <span class="filler"></span>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content>
+    Titel ist required. Der Speichern-Button wird erst aktiv, nachdem geprüft wurde, dass etwas eingegeben wurde. Wenn
+    Der Button also nicht aktiv ist, nachdem du etwas eingegeben hast, einmal kurz das Titel-Eingabefeld verlassen.
+
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Titel*" [formControl]="title" name="title">
+      <mat-error *ngIf="title.invalid">Titel ist required. Bitte ausfüllen.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <textarea matInput placeholder="Beschreibung" [formControl]="description" name="description"></textarea>
+    </mat-form-field>
+
+    <button mat-stroked-button aria-label="Auswahl speichern" (click)="updateSelection()"
+            [disabled]="title.invalid || !title.touched">
+      <mat-icon>save</mat-icon>
+      Auswahl speichern
+    </button>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,53 @@
+<mat-toolbar color="primary">
+  <!--  <button mat-icon-button aria-label="go to yesterday">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>-->
+
+  <span class="filler"></span>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" [formControl]="dateControl" (dateChange)="goToDate($event.value)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker disabled="false" #picker></mat-datepicker>
+  </mat-form-field>
+
+  <span class="filler"></span>
+
+  <!--  <button mat-icon-button aria-label="go to yesterday" (click)="goToTommorow()">
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>-->
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content>
+    Auswahlliste
+    <div>
+      <mat-selection-list>
+        <mat-list-option *ngFor="let selection of selections | async" [selected]="isSelected[selection.id]"
+                         (click)="updateSelection(selection.id)">
+          <h2 matLine>{{selection.title}}</h2>
+          <span matLine>{{selection.description}}</span>
+        </mat-list-option>
+      </mat-selection-list>
+
+      <mat-form-field class="full-width">
+        <textarea matInput rows="5" placeholder="Freitext" name="freeText" [formControl]="freeTextControl"></textarea>
+      </mat-form-field>
+
+      <button mat-stroked-button aria-label="Freitext speichern" (click)="saveReport()">
+        <mat-icon>save</mat-icon>
+        Bericht speichern
+      </button>
+
+      <mat-card *ngIf="saved"><mat-icon>done_all</mat-icon> Bericht wurde gespeichert!</mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-toolbar color="secondary">
+  <span class="filler"></span>
+
+  <button mat-icon-button aria-label="go to yesterday">
+    <mat-icon (click)="goToSettings()">settings_applications</mat-icon>
+  </button>
+</mat-toolbar>

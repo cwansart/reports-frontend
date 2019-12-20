@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="go to yesterday">
+    <mat-icon (click)="navigateBack()">arrow_back_ios</mat-icon>
+  </button>
+
+  <span class="filler"></span>
+
+  <span>Auswahllisten</span>
+
+  <span class="filler"></span>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content>
+    <p>
+      Hier kannst du Auswahllisten hinzufügen, löschen oder bearbeiten.
+    </p>
+    <p *ngIf="!!selections">
+      <mat-selection-list (selectionChange)="selectionChange($event.option.selectionList.selectedOptions.selected)" #list>
+        <mat-list-option *ngFor="let selection of selections | async" [value]="selection.id">
+          <h2 matLine>{{selection.title}}</h2>
+          <span matLine>{{selection.description}}</span>
+        </mat-list-option>
+      </mat-selection-list>
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-toolbar color="secondary">
+  <button mat-icon-button aria-label="go to yesterday" [disabled]="isDeleteDisabled">
+    <mat-icon (click)="delete()">delete_forever</mat-icon>
+  </button>
+
+  <span class="filler"></span>
+
+  <button mat-icon-button aria-label="update selection" [disabled]="isUpdateDisabled">
+    <mat-icon (click)="update()">edit</mat-icon>
+  </button>
+
+  <span class="filler"></span>
+
+  <button mat-icon-button aria-label="create selection" [disabled]="isCreateDisabled">
+    <mat-icon (click)="create()">note_add</mat-icon>
+  </button>
+</mat-toolbar>
